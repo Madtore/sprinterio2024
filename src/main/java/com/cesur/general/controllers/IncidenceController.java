@@ -26,10 +26,10 @@ public class IncidenceController {
     @PostMapping("/incidence")
     public ResponseEntity<?> storeIncidence(@Validated @RequestBody IncidenceDTO incidence) {
     try{ 
-    incidenceService.storeIncidence(incidence);
+        incidenceService.storeIncidence(incidence);
         return new ResponseEntity<IncidenceDTO>(incidence,HttpStatus.CREATED);
     }catch(Exception e){
-        return
+        return new ResponseEntity<IncidenceDTO>(incidence,HttpStatus.BAD_REQUEST);
     }
     }
         
