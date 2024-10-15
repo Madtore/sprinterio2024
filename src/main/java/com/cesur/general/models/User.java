@@ -2,8 +2,11 @@ package com.cesur.general.models;
 
 import java.time.LocalDateTime;
 
+import com.cesur.general.models.utils.Roles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,23 +27,33 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="username",length = 8)
-    private String username;
-    
-    @Column(name="password",length = 8)
-    private String password;
     @Column(name="name",length = 50)
     private String name;
-    @Column(name="birthDate")
-    private String birthDate;
-    //private Role role;
-    @Column(name="lastUpdate")
-    private LocalDateTime lastUpdate;
-    @Column(name="deleteUpdate")
-    private LocalDateTime deleteUpdate;
-    @Column(name="createUpdate")
-    private LocalDateTime createUpdate;
 
+    @Column(name="email",length = 50)
+    private String email;
+    
+    @Column(name="password",length = 32)
+    private String password;
+
+    @Column(name="rol", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Roles rol;
+
+    @Column(name="createdAt")
+    private LocalDateTime createUpdate;
+    
+    @Column(name="active")
+    private Boolean active;
+    
+    @Column(name="deleteAt")
+    private LocalDateTime deleteAt;
+
+    @Column(name="updateAt")
+    private LocalDateTime updateAt;
+
+    @Column(name="lastConnection")
+    private LocalDateTime lastConnection;
 }
 
 

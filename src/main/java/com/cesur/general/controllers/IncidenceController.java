@@ -1,5 +1,9 @@
 package com.cesur.general.controllers;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -11,8 +15,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.cesur.general.models.dtos.IncidenceDTO;
 import com.cesur.general.services.IncidenceService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.server.PathParam;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 
 
 @RestController
@@ -23,6 +34,13 @@ public class IncidenceController {
     private IncidenceService incidenceService;
 
   
+    @PostMapping("/incidence/store")
+    public ResponseEntity<?> storeIncidence1(@Validated @RequestBody IncidenceDTO incidence) {
+
+        incidenceService.storeIncidence(incidence);
+        return new ResponseEntity<IncidenceDTO>(incidence,HttpStatus.CREATED);
+    }
+
     @PostMapping("/incidence")
     public ResponseEntity<?> storeIncidence(@Validated @RequestBody IncidenceDTO incidence) {
     try{ 
@@ -32,5 +50,23 @@ public class IncidenceController {
         return new ResponseEntity<IncidenceDTO>(incidence,HttpStatus.BAD_REQUEST);
     }
     }
-        
+
+    @PostMapping("/incidence/:id")
+    public ResponseEntity<?> addIncidenteDetail(@PathParam(value="id") Integer id) {
+        try {
+            IncidenceDTO incidenceDTO = incidenceService.getIncidenceById(Long.valueOf(id));
+            incidenceService.storeIncidence(incidenceDTO);
+            return new ResponseEntity<IncidenceDTO>(HttpStatus.UPGRADE_REQUIRED);
+        } catch (Exception e) {
+            return new ResponseEntity<IncidenceDTO>(HttpStatus.BAD_REQUEST);
+        }
+       
+      }
+      
+    @GetMapping("/foo")
+    public ResponseEntity<?> foo(HttpServletRequest request) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("Message", "HELLO");
+        return ResponseEntity.ok(data);
+    }
 }

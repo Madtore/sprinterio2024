@@ -2,12 +2,11 @@ package com.cesur.general.services;
 
 
 import java.util.List;
-import org.springframework.stereotype.Service;
 import com.cesur.general.models.dtos.IncidenceDTO;
 
 
 
-@Service
+
 public interface IncidenceService {
 
     void storeIncidence(IncidenceDTO datos);
@@ -17,5 +16,7 @@ public interface IncidenceService {
     IncidenceDTO getIncidenceById(Long id);
 
     List<IncidenceDTO> getIncidenceByUserName(String username);
+
+    void addIncidentence(Integer id);
     
 } 

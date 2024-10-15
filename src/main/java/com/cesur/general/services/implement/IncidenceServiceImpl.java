@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cesur.general.models.Incidence;
 import com.cesur.general.models.dtos.IncidenceDTO;
 import com.cesur.general.repositories.IncidenceRepository;
 import com.cesur.general.services.IncidenceService;
 
+@Service
 public class IncidenceServiceImpl implements IncidenceService{
 
     @Autowired
@@ -18,12 +20,11 @@ public class IncidenceServiceImpl implements IncidenceService{
     @Override
     public void storeIncidence(IncidenceDTO datos) {
         Incidence incidence = new Incidence();
-        incidence.setCategory(datos.getCategory());
         incidence.setPriority(datos.getPriority());
         incidence.setCreatedAt(LocalDateTime.now() );
         incidence.setDescription(datos.getDescription());
+        incidence.setScope(datos.getScope());
         incidence.setUserCreated(null);
-
         incidenceRepository.save(incidence);
     }
 
@@ -43,6 +44,11 @@ public class IncidenceServiceImpl implements IncidenceService{
     public List<IncidenceDTO> getIncidenceByUserName(String username) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getIncidenceByUserName'");
+    }
+
+    @Override
+    public void addIncidentence(Integer id) {
+        incidenceRepository.save(incidenceRepository.findById(Long.valueOf(id)).get());
     }
     
 
