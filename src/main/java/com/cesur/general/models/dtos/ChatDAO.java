@@ -1,7 +1,5 @@
 package com.cesur.general.models.dtos;
 
-import java.time.LocalDateTime;
-
 import com.cesur.general.models.Incidence;
 import com.cesur.general.models.User;
 

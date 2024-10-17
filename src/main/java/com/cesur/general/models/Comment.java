@@ -1,9 +1,6 @@
 package com.cesur.general.models;
 
 import java.time.LocalDateTime;
-
-import com.cesur.general.models.dtos.User;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
