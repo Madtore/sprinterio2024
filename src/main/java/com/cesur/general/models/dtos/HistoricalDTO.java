@@ -12,15 +12,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatDAO {
+public class HistoricalDTO {
 
     private Long id;
 
-    private String message;
+    private String description;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime deletedAt;
 
     private User userCreated;
 
     private Incidence incidence;
-
-
 }

@@ -1,9 +1,6 @@
 package com.cesur.general.models;
 
 import java.time.LocalDateTime;
-
-import com.cesur.general.models.dtos.User;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,26 +14,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name= "comments")
+@Table(name = "comments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name= "content")
+    @Column(name = "content")
     private String content;
 
-    @Column(name= "createAt")
+    @Column(name = "createAt")
     private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User userCreated;
-
 
     @ManyToOne
     @JoinColumn(name = "incidence_id")
